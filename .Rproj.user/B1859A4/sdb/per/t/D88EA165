@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Clear workspace\n# ------------------------------------------------------------------------------\nrm(list=ls())\n\n# Load libraries\n# ------------------------------------------------------------------------------\nlibrary('tidyverse')\nlibrary('readr')\nlibrary('broom')\nlibrary('cowplot')\n\n# Load data\n# ------------------------------------------------------------------------------\nmy_data = read_delim(file = 'data/stratification_analysis.txt', delim = \"\\t\")\nmy_data = my_data %>% mutate(z = factor(z))\n\n# Visualise the data\n# ------------------------------------------------------------------------------\np1 = my_data %>%\n  ggplot(aes(x = x, y = y)) +\n  geom_smooth(method='lm',formula = y ~ x) +\n  geom_point() + \n  theme_bw()\n\n# Perform a linear regression on the data raw and adjusted for z\n# ------------------------------------------------------------------------------\nmy_model_raw = my_data %>% lm(formula = y ~ x, data = .) %>% summary %>% tidy\nmy_model_adj = my_data %>% lm(formula = y ~ x + z, data = .) %>% summary %>% tidy\nprint(my_model_raw)\nprint(my_model_adj)\n\n# Visualise the data with the regression line and confidence bands\n# ------------------------------------------------------------------------------\np2 = my_data %>%\n  ggplot(aes(x = x, y = y, colour = z)) +\n  geom_point() + \n  geom_smooth(method='lm',formula = y ~ x) +\n  theme_bw()\n\nmy_plot = plot_grid(p1,p2)\nprint(my_plot)\n",
+    "created" : 1496143872147.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2379494444",
+    "id" : "D88EA165",
+    "lastKnownWriteTime" : 1496144605,
+    "last_content_update" : 1496144605849,
+    "path" : "~/Projects/Teaching/Tutorials/scripts/06_adjusted_analysis.R",
+    "project_path" : "scripts/06_adjusted_analysis.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

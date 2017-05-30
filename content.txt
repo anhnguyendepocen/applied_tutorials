@@ -1,0 +1,10 @@
+Final content
+ - Kvartiler
+ - Justering
+ - Kalibrering
+ - Stratificering
+ - Cox regression
+ - Lineær regression
+ - Logistisk regression
+ - Kaplan-meier kurve
+ 
